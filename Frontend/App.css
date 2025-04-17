@@ -1,0 +1,818 @@
+/* Reset & Layout */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: sans-serif;
+}
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1px;
+}
+button:hover {
+  opacity: 0.9;
+  transform: scale(1.03);
+  transition: 0.2s ease;
+}
+.app {
+  width: 100%;
+  position: relative;
+}
+/* Hero Section */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  height: 100vh;
+  background: url('/assets/images/hero-bg.jpg') no-repeat center center/cover;
+}
+/* Overlay: darkens background for better text visibility */
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: transparent;
+  z-index: 1;
+}
+/* Text on top of overlay */
+.hero-text {
+  position: absolute;
+  right: 5%;
+  top: 35%;
+  text-align: right;
+  z-index: 2;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Important to align children to the right */
+}
+.safar-title {
+  font-size: 2.2rem;
+  font-family: cursive;
+  font-style: italic;
+  color: #FFD700; /* Soft yellow */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  margin-bottom: 1rem;
+}
+.main-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+}
+.bharat-tour {
+  font-size: 4.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  background: linear-gradient(
+    270deg,
+    #ffb347,
+    #ffffff,
+    #6abe30
+  );
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+  letter-spacing: 4px;
+  animation: tricolorShift 6s ease-in-out infinite;
+  padding-right: -7rem; /* This will shift text more to the right inside the container */
+}
+/* Navbar */
+.hamburger {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1001;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: #222;
+  cursor: pointer;
+}
+.navbar {
+  position: fixed;
+  top: 60px;
+  left: 15px;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 10px;
+  display: none;
+  flex-direction: column;
+  z-index: 1000;
+  border-radius: 10px;
+}
+.navbar.show {
+  display: flex;
+}
+.nav-links {
+  list-style: none;
+}
+.nav-links li {
+  margin: 10px 0;
+}
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+.nav-links a:hover {
+  color: #e91e63;
+}
+/* About Section */
+#about {
+  padding: 3rem 2rem;
+  background: #f8f1e7;
+  text-align: center;
+}
+.about {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: auto;
+  flex-wrap: nowrap;
+  gap: 2rem;
+  text-align: left;
+}
+.about-img {
+  width: 400px;
+  margin: 1rem;
+  border-radius: 10px;
+  flex: 1 1 40%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.about-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3),
+              0 0 15px rgba(255, 215, 0, 0.3); /* soft golden glow */
+}
+
+.about-title,
+.packages-title,
+.booking-title {
+  font-size: 3rem;
+  font-weight: bold;
+  font-family: 'Garamond', 'Georgia', serif;
+  color: #5a2a83; /* Deep royal purple */
+  text-align: center;
+  text-transform: uppercase;
+  position: relative;
+  margin: 2rem auto;
+  opacity: 0;
+  animation:
+    royalFadeUp 1s ease-out forwards 0.3s,
+    sparkleGlow 4s ease-in-out infinite;
+
+  transition: all 0.4s ease-in-out;
+}
+
+
+.about-title::after,
+.packages-title::after,
+.booking-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(to right, #ffd700, #fff8dc);
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+@keyframes sparkleGlow {
+  0%, 100% {
+    text-shadow:
+      1px 1px 3px #ffd700,
+      0 0 8px rgba(255, 215, 0, 0.5),
+      0.5px 0.5px 1px #fff8dc;
+  }
+  50% {
+    text-shadow:
+      1px 1px 5px #ffea00,
+      0 0 12px rgba(255, 240, 180, 0.7),
+      0.5px 0.5px 2px #ffffff;
+  }
+}
+.about-text {
+  flex: 1 1 55%;
+  color: black;
+}
+/* Destinations */
+.packages {
+  padding: 3rem 2rem;
+  background: #f8f1e7;
+  text-align: center;
+}
+.destination-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.destination-card {
+  width: 250px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+.destination-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3),
+              0 0 15px rgba(255, 215, 0, 0.3); /* soft golden glow */
+}
+.destination-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+.destination-desc {
+  padding: 0 1rem 1rem;
+  font-size: 0.9rem;
+}
+/* Indian Cuisines Section */
+.cuisine-section {
+  background: linear-gradient(to right, #fff0f0, #ffe6e6);
+  padding: 50px 20px;
+  text-align: center;
+  position: relative;
+}
+
+.cuisine-title {
+  font-family: 'Cinzel', serif;
+  font-size: 3rem;
+  color: #a30000; /* Deep red for richness */
+  text-shadow:
+    2px 2px 6px #d4af37,   /* golden outer glow */
+    0 0 8px #ffdf7f,        /* soft golden aura */
+    1px 1px 2px rgba(0, 0, 0, 0.3); /* subtle black depth */
+  margin-bottom: 40px;
+  transform: skew(-5deg);
+}
+
+
+.cuisine-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cuisine-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  background: white;
+  cursor: pointer;
+}
+
+.cuisine-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(255, 102, 153, 0.3);
+}
+
+.cuisine-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.cuisine-card:hover .cuisine-img {
+  transform: scale(1.1);
+}
+.cuisine-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 0;
+  background: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #fff8dc;
+  text-shadow:
+    1px 1px 2px #000,
+    0 0 5px #d4af37,
+    0 0 10px #d4af37;
+  letter-spacing: 1px;
+}
+
+
+.view-more-link {
+  display: inline-block;
+  margin-top: 30px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #d1005c;
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+.view-more-link:hover {
+  color: #a00040;
+}
+
+/* Trains Page - Royal Redesign */
+.train-page {
+  background: url('/assets/images/indian-culture-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-y: auto;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.train-card {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1rem;
+  border-radius: 10px;
+  color: #222;
+  width: 250px;
+}
+/* Form container */
+.train-form {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 15px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  margin-bottom: 0.5rem;
+  animation: fade 1s ease-in-out;
+}
+.train-form select {
+  background-color: #fff8dc; /* Light creamy background */
+  border: 2px solid #daa520;
+  border-radius: 8px;
+  padding: 0.7rem;
+  margin: 0.5rem;
+  width: 40%;
+  min-width: 180px;
+  font-size: 1rem;
+  color: #333;
+  font-family: 'Georgia', serif;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+  appearance: none; /* Removes default arrow for customization */
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10' viewBox='0 0 24 24'%3E%3Cpath fill='%23222' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+}
+.train-form select:focus {
+  outline: none;
+  border-color: #b8860b;
+  box-shadow: 0 0 8px rgba(255, 204, 0, 0.6);
+}
+.train-form input {
+  background-color: #fff8dc;
+  border: 2px solid  goldenrod;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  margin: 0.5rem;
+  width: 40%;
+  min-width: 180px;
+  font-size: 1rem;
+  background-color: #fff8dc;
+  color: #333;
+  font-family: 'Georgia', serif;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+}
+
+.train-card p,
+.train-card h3 {
+  color: #222;
+}
+.train-form input::placeholder {
+  color: #555;
+}
+/* Search Button */
+.train-form button {
+  background-color: #ffcc00;
+  color: #222;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  margin: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: transform 0.2s ease, background-color 0.3s;
+  box-shadow: 0 4px 8px rgba(255, 204, 0, 0.6);
+}
+.train-form button:hover {
+  background-color: #e6b800;
+  transform: scale(1.05);
+}
+.train-form input,
+.train-form button {
+  color: #111;
+}
+/* Login Form */
+.login-box {
+  background-color: rgba(0, 0, 0, 0.6);
+  max-width: 400px;
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
+}
+.login-box input {
+  width: 90%;
+  margin: 0.5rem 0;
+  padding: 0.7rem;
+  border-radius: 5px;
+  border: none;
+}
+.login-box button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  background-color: #ffcc00;
+  color: black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+/* Train Booking */
+.train-booking-container {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.5);
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+}
+
+.train-form input::placeholder {
+  color: #555 !important; /* or any darker color like #333 */
+  opacity: 1; /* ensures it's not faded */
+  font-weight: 500;
+}
+
+.train-results {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.error-message {
+  text-align: center;
+  color: red;
+  font-weight: bold;
+  margin-top: 0.3rem;
+  background: #ffe6e6;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ff9999;
+  border-radius: 8px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1rem;
+}
+.train-card {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1rem;
+  border-radius: 10px;
+  color: #222;
+  width: 250px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.train-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3),
+              0 0 15px rgba(255, 215, 0, 0.3); /* soft golden glow */
+}
+.train-card h3,
+.train-card p {
+  color: #222;
+}
+.train-card button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+/* Royal Train Table */
+.train-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+  font-size: 1rem;
+  font-family: 'Georgia', serif;
+  color: #333;
+}
+.train-table th,
+.train-table td {
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+.train-table th {
+  background-color: #ffcc00;
+  color: #222;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+.train-table td {
+  background-color: #fffdf3;
+}
+
+.train-table tr:hover {
+  background-color:#fff5c2;;
+}
+/* Table Container with Scroll */
+.table-container {
+  max-height: 400px;
+  overflow-y: auto;
+  width: 100%;
+  max-width: 1000px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.4);
+  padding: 1rem;
+  animation: royalFadeUp 1s ease-in-out;
+  position: relative; /* required for absolute close button */
+}
+
+.table-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  background: #f5f5f5;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #900;
+  z-index: 10;
+  transition: transform 0.2s ease;
+}
+
+.close-btn:hover {
+  transform: scale(1.2);
+}
+
+.table-container::-webkit-scrollbar {
+  width: 8px;
+}
+.table-container::-webkit-scrollbar-thumb {
+  background: #ffcc00;
+  border-radius: 10px;
+}
+.table-container::-webkit-scrollbar-track {
+  background: #fff8dc;
+}
+
+/* Book Button in Table */
+.book-btn {
+  background-color: #8b0000;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+}
+.book-btn:hover {
+  background-color:#b22222;
+}
+.seat-input {
+  width: 50px;
+  margin-right: 8px;
+  padding: 5px;
+  border: 1px solid #c98b00;
+  border-radius: 4px;
+}
+.clear-btn {
+  margin-left: 10px;
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.clear-btn:hover {
+  background-color: #c9302c;
+}
+
+
+/* Animations */
+.animate-pop {
+  animation: pop 0.6s ease-in-out;
+}
+.toggle-form {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+}
+
+.toggle-form span {
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.footer {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: #fff;
+  padding: 40px 60px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.footer-brand {
+  flex: 1;
+  min-width: 250px;
+  margin-right: 30px;
+}
+
+.footer-brand img.footer-logo {
+  width: 120px;
+  margin-bottom: 10px;
+}
+
+.footer-links,
+.footer-contact {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-links h4,
+.footer-contact h4 {
+  color: #f5c518;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links ul li a {
+  color: #ccc;
+  text-decoration: none;
+  margin-bottom: 8px;
+  display: block;
+  transition: color 0.3s;
+}
+
+.footer-links ul li a:hover {
+  color: #f5c518;
+}
+
+.footer-contact p {
+  color: #ccc;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.footer-contact p a {
+  color: #ccc;
+}
+
+.footer-contact i {
+  font-size: 18px;
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #333;
+  margin-top: 30px;
+  padding-top: 20px;
+  color: #aaa;
+}
+
+
+
+/* Animation keyframes */
+@keyframes royalFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+    text-shadow: none;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2),
+                 0 0 8px rgba(255, 215, 0, 0.3);
+  }
+}
+@keyframes pop {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.animate-slide {
+  animation: slideIn 0.6s ease-out;
+}
+@keyframes slideIn {
+  from { transform: translateY(-30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.animate-fade {
+  animation: fade 0.6s ease-in-out;
+}
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes tricolorShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+/* Optional: Slow glowing animation effect */
+@keyframes glowText {
+  from {
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+  }
+  to {
+    text-shadow: 2px 2px 12px rgba(255, 215, 0, 0.9), 0 0 12px rgba(255, 223, 0, 0.6);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .train-form input {
+    width: 80%;
+  }
+  .login-box {
+    width: 90%;
+  }
+  .train-booking-container {
+    padding: 1rem;
+  }
+  .booking-title {
+    font-size: 2rem;
+  }
+  .about {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-text {
+    right: 10%;
+    top: 40%;
+  }
+  .destination-card {
+    width: 90%;
+  }
+}
