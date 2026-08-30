@@ -38,7 +38,7 @@ function generateTrains(n = 100) {
   return trains;
 }
 
-const sampleTrains = generateTrains(100);
+const sampleTrains = generateTrains(400);
 
 mongoose.connect(process.env.MONGO_URI)
   .then(async () => {
