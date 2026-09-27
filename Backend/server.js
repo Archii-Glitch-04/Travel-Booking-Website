@@ -9,7 +9,7 @@ const trainRoutes = require("./routes/trainRoutes");
 const app = express();
 
 // ✅ Middleware
-app.use(cors());
+app.use(cors({ origin: "https://travel-booking-website-mocha.vercel.app" }));
 app.use(express.json());
 
 app.use((req, res, next) => {
