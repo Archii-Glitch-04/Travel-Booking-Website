@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
 
 const bookingSchema = new mongoose.Schema({
+  pnr: {
+    type: String,
+    unique: true, //ensures MongoDB itself enforces no two bookings ever share a PNR
+    required: true,
+  },
+
   username: String,
   trainId: {
     type: mongoose.Schema.Types.ObjectId,

@@ -7,6 +7,7 @@ const TrainsPage = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -18,30 +19,48 @@ const TrainsPage = () => {
   const [message, setMessage] = useState("");
   const [showTable, setShowTable] = useState(false);
   const [selectedSeats, setSelectedSeats] = useState({});
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [confirmedBooking, setConfirmedBooking] = useState(null);
 
-  const handleLogin = () => {
-    if (username && password) {
-      setLoggedIn(true);
-    }
-  };
-
-  const handleSignup = () => {
-    if (!name || !email || !username || !password || !confirmPassword) {
-      alert("Please fill in all fields.");
-      return;
-    }
-    const nameRegex = /^[A-Za-z\s]+$/;
+  const handleLogin = async () => {
+  if (!username || !password) {
+    alert("Please enter both username and password.");
+    return;
+  }
+  try {
+    const response = await axios.post("http://localhost:5000/login", {
+      username,
+      password,
+    });
+    setUserEmail(response.data.user.email);
+    setLoggedIn(true);
+  } catch (error) {
+    console.error("Login failed:", error);
+    alert(error.response?.data?.message || "Login failed. Please try again.");
+  }
+};
+  const handleSignup = async () => {
+  if (!name || !email || !username || !password || !confirmPassword) {
+    alert("Please fill in all fields.");
+    return;
+  }
+  const nameRegex = /^[A-Za-z\s]+$/;
   if (!nameRegex.test(name)) {
     alert("Name can only contain letters and spaces.");
     return;
   }
+  if (password !== confirmPassword) {
+    alert("Passwords do not match.");
+    return;
+  }
 
-
-    if (password !== confirmPassword) {
-      alert("Passwords do not match.");
-      return;
-    }
-
+  try {
+    await axios.post("http://localhost:5000/signup", {
+      name,
+      email,
+      username,
+      password,
+    });
     alert(`🎉 Welcome aboard, ${name}! You can now log in.`);
     setIsSignUp(false);
     setName("");
@@ -49,7 +68,11 @@ const TrainsPage = () => {
     setUsername("");
     setPassword("");
     setConfirmPassword("");
-  };
+  } catch (error) {
+    console.error("Signup failed:", error);
+    alert(error.response?.data?.message || "Signup failed. Please try again.");
+  }
+};
 
   const handleSearch = async () => {
     if (!from || !to || !date) {
@@ -91,21 +114,27 @@ const TrainsPage = () => {
   };
 
   const handleBook = async (trainId) => {
-    const seats = selectedSeats[trainId] || 1;
-    try {
-      await axios.post("http://localhost:5000/book", {
-        trainId,
-        username,
-        seats,
-        date,
-      });
-      alert("✅ Booking is Confirmed!!! Waiting to see you on board, Happy Journey 🦚");
-      handleSearch();
-    } catch (error) {
-      console.error("Booking error:", error);
-      alert("❌ Booking failed. Try again.");
-    }
-  };
+  const seats = selectedSeats[trainId] || 1;
+  const train = trains.find((t) => t._id === trainId);
+  try {
+    const response = await axios.post("http://localhost:5000/book", {
+      trainId,
+      username,
+      email: userEmail,
+      seats,
+      date,
+    });
+    setConfirmedBooking({
+      ...response.data.booking,
+      trainName: train?.name || "Train",
+    });
+    setShowConfirmation(true);
+    handleSearch();
+  } catch (error) {
+    console.error("Booking error:", error);
+    alert("❌ Booking failed. Try again.");
+  }
+};
 
   const handleSeatChange = (trainId, value) => {
     const updated = { ...selectedSeats, [trainId]: parseInt(value) || 1 };
@@ -266,6 +295,50 @@ const TrainsPage = () => {
               </table>
             </div>
           )}
+        </div>
+      )}
+            {showConfirmation && confirmedBooking && (
+        <div className="confirmation-overlay">
+          <div className="confirmation-card">
+            <div className="confirmation-header">
+              <h2>🎉 Booking Confirmed!</h2>
+            </div>
+            <div className="confirmation-body">
+              <div className="confirmation-row">
+                <span>PNR</span>
+                <strong>{confirmedBooking.pnr}</strong>
+              </div>
+              <div className="confirmation-row">
+                <span>Train</span>
+                <strong>{confirmedBooking.trainName}</strong>
+              </div>
+              <div className="confirmation-row">
+                <span>From</span>
+                <strong>{confirmedBooking.from}</strong>
+              </div>
+              <div className="confirmation-row">
+                <span>To</span>
+                <strong>{confirmedBooking.to}</strong>
+              </div>
+              <div className="confirmation-row">
+                <span>Date</span>
+                <strong>{confirmedBooking.date}</strong>
+              </div>
+              <div className="confirmation-row">
+                <span>Seats</span>
+                <strong>{confirmedBooking.seats}</strong>
+              </div>
+              <p className="confirmation-note">
+                A confirmation email has been sent to your inbox. Have a safe journey! 🙏
+              </p>
+            </div>
+            <button
+              className="confirmation-close-btn"
+              onClick={() => setShowConfirmation(false)}
+            >
+              Done
+            </button>
+          </div>
         </div>
       )}
     </div>

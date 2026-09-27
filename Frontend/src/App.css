@@ -816,3 +816,91 @@ button:hover {
     width: 90%;
   }
 }
+
+/*NEW*/
+
+.confirmation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.confirmation-card {
+  background: #fff;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 420px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  animation: popIn 0.3s ease;
+  color: #222;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.confirmation-header {
+  background: #7a1f1f;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+.confirmation-header h2 {
+  margin: 0;
+  color: #fff;
+}
+
+.confirmation-body {
+  padding: 20px;
+  color: #222;
+}
+
+.confirmation-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+  color: #222;
+}
+
+.confirmation-row span {
+  color: #555;
+}
+
+.confirmation-row strong {
+  color: #111;
+}
+
+.confirmation-note {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #666;
+  text-align: center;
+}
+
+.confirmation-close-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: #d4af37;
+  color: #000;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.confirmation-close-btn:hover {
+  background: #c19a2e;
+}
