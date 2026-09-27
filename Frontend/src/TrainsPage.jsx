@@ -28,7 +28,7 @@ const TrainsPage = () => {
     return;
   }
   try {
-    const response = await axios.post("http://localhost:5000/login", {
+    const response = await axios.post("https://safar-e-hind-backend.onrender.com", {
       username,
       password,
     });
@@ -55,7 +55,7 @@ const TrainsPage = () => {
   }
 
   try {
-    await axios.post("http://localhost:5000/signup", {
+    await axios.post("https://safar-e-hind-backend.onrender.com", {
       name,
       email,
       username,
@@ -85,7 +85,7 @@ const TrainsPage = () => {
     setMessage("");
 
     try {
-      const response = await axios.get("http://localhost:5000/search", {
+      const response = await axios.get("https://safar-e-hind-backend.onrender.com", {
         params: { from, to, date },
       });
 
@@ -117,7 +117,7 @@ const TrainsPage = () => {
   const seats = selectedSeats[trainId] || 1;
   const train = trains.find((t) => t._id === trainId);
   try {
-    const response = await axios.post("http://localhost:5000/book", {
+    const response = await axios.post("https://safar-e-hind-backend.onrender.com", {
       trainId,
       username,
       email: userEmail,
